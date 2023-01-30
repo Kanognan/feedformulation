@@ -10,7 +10,8 @@
 	$usertest = 1;
 	$category_id = $_POST['category'];
 	
-    if (isset($_POST['add'])) {
+    if (isset($_POST['addpost'])) {
+
 		//*** Insert Question ***//
 
 		$strSQL = "INSERT INTO 
@@ -30,12 +31,9 @@
 
 		if (mysqli_query($conn, $strSQL)) {
 			echo '<script>alert("เพิ่มโพสสำเร็จ");window.location="home-webboard.php";</script>';
-			// header("location:home-webboard.php");
 		} else {
 			echo "Error: " . $strSQL . "<br>" . mysqli_error($conn);
 		}
-		
-
     }
 	mysqli_close($conn);
 ?>

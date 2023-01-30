@@ -28,6 +28,9 @@ include('../server.php');
             color: white;
             padding: 1rem;
         }
+        .add-posts{
+            padding: 2rem;
+        }
     </style>
 </head>
 
@@ -48,9 +51,9 @@ include('../server.php');
                         </div>
                     <?php endif ?>
 
-                    <div class="input-group">
+                    <div class="form-group">
                         <label for="category">หมวดหมู่</label>
-                        <select name="category" id="category">
+                        <select name="category" id="category" class="form-control" >
                             <?php
                             $sql = "SELECT * FROM category";
                             $result = $conn->query($sql);
@@ -65,27 +68,25 @@ include('../server.php');
                         </select>
                     </div>
 
-                    <div class="input-group">
+                    <div class="form-group">
                         <label for="posts_name">ชื่อกระทู้</label>
-                        <textarea type="content" name="posts_name" rows="3" cols="100"></textarea>
+                        <textarea type="content" name="posts_name" class="form-control" rows="3" cols="100"></textarea>
                     </div>
-                    <div class="input-group">
+                    <div class="form-group">
                         <label for="posts_content">ข้อความกระทู้</label>
-                        <textarea type="content" name="posts_content" rows="5" cols="100"></textarea>
+                        <textarea type="content" name="posts_content" class="form-control" rows="5" cols="100"></textarea>
                     </div>
-                    <div class="input-group">
+                    <div class="form-group">
                         <label for="thread_img">เพิ่มรูปภาพ</label>
                         <input type="file" name="thread_img">
                     </div>
-                    <div class="input-group">
-                        <button type="submit" name="add" class="btn">เพิ่มกระทู้</button>
+                    <div class="form-group">
+                        <button type="submit" name="addpost" class="btn">เพิ่มกระทู้</button>
                     </div>
-                    <div class="input-group">
+                    <div class="form-group">
                         <button type="reset" name="reset" class="btn">Reset</button>
                     </div>
-                    <!-- <p><a href="register.php">ลงทะเบียน</a></p> -->
                 </form>
-
             </div>
         </div>
     </div>
