@@ -1,69 +1,150 @@
 <?php
 session_start();
-
-// if (!isset($_SESSION['username'])) {
-//     $_SESSION['msg'] = "You must log in first";
-//     header('location: login.php');
-// }
-
-// if (isset($_GET['logout'])) {
-//     session_destroy();
-//     unset($_SESSION['username']);
-//     header('location: login.php');
-// }
-
-?>
+include "server.php"
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <!-- 
-    <link rel="stylesheet" href="style.css"> -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <style>
-        body {
-            /* height: 1000rem; */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Kanit', sans-serif;
+    }
+
+    body {
+        padding-top: 6em;
+    }
+
+    .heading {
+        font-size: 20px;
+        font-weight: 600;
+        color: #3D5AFE;
+    }
+
+    .card-content {
+        width: 250rem;
+    }
+
+    .menu-card {
+        transition: all 0.2s ease;
+        cursor: pointer;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .menu-card:hover {
+        box-shadow: 5px 6px 6px 2px gray;
+        background-color: #d5e6fc;
+        transform: scale(1.1);
+        border-radius: 2rem;
+    }
+
+    .img img {
+        height: 25rem;
+        width: 100%;
+        object-fit: cover;
+
+    }
+
+    .card-news {
+        width: 21rem !important;
+        margin: 0.5rem;
+        border-radius: 20px !important;
+    }
+
+    .card-new {
+        padding: 0 !important;
+        margin: 1em;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        transition: transform 250ms;
+    }
+
+    .card-new:hover,
+    .card-new:focus {
+        transform: translateY(-10px);
+        cursor: pointer;
+
+    }
+
+    .card-new img {
+        height: 15rem !important;
+        width: 100% !important;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    img.card-img-top {
+        border-top-left-radius: 20px !important;
+        border-top-right-radius: 20px !important;
+    }
+
+    .h1 h1 {
+        margin: 0em 0em 1em;
+        text-align: center;
+    }
+
+    .card-title {
+        font-weight: bold;
+        margin: 0.5em 0em;
+    }
+
+    .detail {
+        height: 11em;
+    }
+
+    .detail p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+    }
+
+    .detail h5 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+    }
+
+    .card-all {
+        background-color: #f8f8f8;
+        padding: 3em 0em;
+    }
+
+    .btn-readall a {
+        width: 12em !important;
+        border-radius: 20px;
+    }
+        @media (max-width: 577px) {
+
+            .manual,
+            .center {
+                text-align: center !important;
+            }
+
         }
 
-        .heading {
-            font-size: 20px;
-            font-weight: 600;
-            color: #3D5AFE;
-        }
-
-        .crad-content {
-            width: 250rem;
-        }
-
-        .content {
-            /* background-color: #e9ecef; */
-
-        }
-
-        .cards {
-            transition: all 0.2s ease;
-            cursor: pointer;
-            margin-top: 7rem;
-            margin-bottom: 7rem;
-        }
-
-        .cards:hover {
-            box-shadow: 5px 6px 6px 2px gray;
-            background-color: #d5e6fc;
-            transform: scale(1.1);
-            border-radius: 2rem;
+        .row {
+            margin: 0px !important;
         }
     </style>
 </head>
 
 <body>
 
-    <?php include("nav-user.php") ?>
+    <?php include("nav-bar.php") ?>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -73,18 +154,18 @@ session_start();
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                 aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
+        <div class="carousel-inner img">
+            <div class="carousel-item active caro">
                 <img src="https://www.fossanalytics.com/-/media/images/segments/raw-milk-testing/articletop/cows-1480x550.jpg"
                     class="d-block w-100" alt="...">
             </div>
-            <div class="carousel-item">
-                <img src="https://www.fossanalytics.com/-/media/images/segments/raw-milk-testing/articletop/cows-1480x550.jpg"
+            <div class="carousel-item caro">
+                <img src="https://farmhouseguide.com/wp-content/uploads/2022/05/Farm-black-and-white-cows-graze-in-meadow-ee220511.png"
                     class="d-block w-100" alt="...">
             </div>
-            <div class="carousel-item">
-                <img src="https://www.fossanalytics.com/-/media/images/segments/raw-milk-testing/articletop/cows-1480x550.jpg"
-                    class="d-block w-100" alt="...">
+            <div class="carousel-item caro">
+                <img src="https://dug.com/wp-content/uploads/2021/08/Webp.net-resizeimage-5.jpg" class="d-block w-100"
+                    alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -100,65 +181,137 @@ session_start();
     </div>
 
     <div class="container mt-4 d-flex justify-content-center">
-        <div class="row g-0 crad-content ">
-            <div class="col-md-4 border-right content">
-                <div class="cards">
+        <div class="row g-0 card-content ">
+            <div class="col-md-4 border-right content" onclick="window.location='raw/select_raw.php'">
+                <div class="cards menu-card">
                     <div class="first p-4 text-center">
-                        <img src="Images/Test.png" style="width: 8rem;" />
-                        <h5>ข่าวสารทั้งหมด</h5>
+                        <img src="Images/calculate1.png" style="width: 8rem; margin-bottom: 1rem" />
+                        <h5>คำนวณ</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 border-right content">
-                <div class="cards">
+            <div class="col-md-4 border-right content" onclick="window.location='price/price.php'">
+                <div class="cards menu-card">
                     <div class="second p-4 text-center">
-                        <img src="Images/Test.png" style="width: 8rem;" />
+                        <img src="Images/price.png" style="width: 8rem; margin-bottom: 1rem" />
                         <h5>ราคาวัตถุดิบ</h5>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 content ">
-                <div class="cards">
-                    <div class="third p-4 text-center">
-                        <img src="Images/Test.png" style="width: 8rem;" />
+                <div class="cards menu-card">
+                    <div class="third p-4 text-center" onclick="window.location='knowledge/knowledge.php'">
+                        <img src="Images/knowlenge.png" style="width: 8rem; margin-bottom: 1rem" />
                         <h5>ความรู้ / เทคนิค</h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="card-all">
     <div class="container">
-        <hr>
-        <div>
+        <div class="h1">
             <h1>ข่าวสารที่น่าสนใจ</h1>
         </div>
-    </div>
-    <div class="homecontent">
-        <!--  notification message -->
-        <?php if (isset($_SESSION['success'])): ?>
-            <div class="success">
-                <h3>
-                    <?php
-                    // echo $_SESSION['success'];
-                    // unset($_SESSION['success']);
-                    ?>
-                </h3>
+        <div class="card-deck row d-flex justify-content-center news-box">
+            <?php
+            $sql = "SELECT news.*, news_img.news_img
+                    FROM news
+                    LEFT JOIN news_img ON news.news_id = news_img.news_id
+                    GROUP BY news.news_id
+                    ORDER BY news.createAt DESC";
+            $result = mysqli_query($conn, $sql);
+            $counter = 0; // กำหนดตัวแปรนับจำนวนข่าวที่แสดง
+            if ($result && $result->num_rows > 0) {
+                // วนลูปแสดงข้อมูลข่าวทั้งหมด
+                while ($row = $result->fetch_assoc()) {
+                    if ($counter < 6) { // เพิ่มเงื่อนไขนับจำนวนข่าว
+                        $creatAt = $row['createAt'];
+                        $newsDate = new DateTime($creatAt);
+                        $currentDate = new DateTime(); // Current date and time
+                        // Calculate the difference in days
+                        $interval = $currentDate->diff($newsDate);
+                        $daysDifference = $interval->days;
+                        $news_id = $row['news_id'];
+            ?>
+            <div class="card-news card-new card col-md-4 mt-3 col-sm-10 p-0">
+                <div id="carouselExampleControls<?php echo $news_id; ?>" class="carousel slide"
+                    data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php
+                        // Query เพื่อดึงรูปภาพของข่าวนั้นๆ
+                        $sql_images = "SELECT * FROM news_img WHERE news_id = $news_id";
+                        $result_images = mysqli_query($conn, $sql_images);
+                        $is_first = true;
+                        // วนลูปแสดงรูปภาพของข่าวนั้นๆ
+                        while ($image_row = mysqli_fetch_assoc($result_images)) {
+                        ?>
+                        <div class="carousel-item <?php echo $is_first ? 'active' : ''; ?>">
+                            <img src="pic/<?php echo $image_row['news_img']; ?>" class="d-block w-100"
+                                alt="News Image">
+                        </div>
+                        <?php
+                            $is_first = false;
+                        }
+                        ?>
+                    </div>
+                    <button class="carousel-control-prev" type="hidden"
+                        data-bs-target="#carouselExampleControls<?php echo $news_id; ?>" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="hidden"
+                        data-bs-target="#carouselExampleControls<?php echo $news_id; ?>" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="card-body detail" onclick="window.location='news/readnews.php?news_id=<?php echo $news_id; ?>'">
+                    <h5 class="card-title news_topic">
+                        <?php echo $row['news_topic']; ?>
+                    </h5>
+                    <p class="card-text news-detail text-muted">
+                        <?php echo $row['news_detail']; ?>
+                    </p>
+                </div>
+                <div class="card-footer d-flex mb-2" style="margin-bottom: 0 !important;">
+                    <small class="text-muted p-2">โพสเมื่อ
+                        <?php
+                        if ($daysDifference == 0) {
+                            echo "ล่าสุดวันนี้";
+                        } else {
+                            echo $daysDifference . " วันที่ผ่านมา";
+                        }
+                        ?>
+                    </small>
+                    <small class="text-muted ms-auto p-2">อ่านเพิ่มเติม</small>
+                </div>
             </div>
-        <?php endif ?>
-
-        <!-- logged in user information -->
-        <?php if (isset($_SESSION['username'])): ?>
-            <p>Welcome <strong>
-                    <?php echo $_SESSION['username']; ?>
-                </strong></p>
-            <p><a href="index.php?logout='1'" style="color: red;">Logout</a></p>
-        <?php endif ?>
+            <?php
+                        $counter++; // เพิ่มจำนวนข่าวที่แสดงไปทีละ 1
+                    }
+                }
+            }
+            ?>
+            <?php if ($counter >= 6): ?>
+            <!-- ส่วนปุ่ม "อ่านข่าวทั้งหมด" -->
+            <div class="text-center mt-4 mb-2 btn-readall">
+                <a href="news/user-news.php" class="btn btn-outline-secondary">อ่านข่าวทั้งหมด</a>
+            </div>
+            <?php endif; ?>
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-
+</div>
+    <footer class="text-white">
+        <div class="row">
+            <div class="text-start pt-3 pb-3 col-12 col-sm-6 col-md-6 center" style="background-color: #46739C;">© 2024
+                Copyright :
+                <a class="text-white" href="######">College of Computing Khon Kaen University</a>
+            </div>
+            <div class="text-end pt-3 pb-3 col-12 col-sm-6 col-md-6 manual" style="background-color: #46739C;"><a
+                    class="text-white" href="Images/Manual.pdf" target='_blank'>คู่มือการใช้งานเว็บไซต์</a>
+            </div>
+        </div>
+    </footer>
 </body>
-
 </html>

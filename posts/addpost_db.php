@@ -1,39 +1,67 @@
-<?php 
-    session_start();
-    include('../server.php');
+<?php
+session_start();
+include '../server.php';
 
-    $errors = array();
+date_default_timezone_set('Asia/Bangkok');
+$createAt = date('Y-m-d H:i:s', time());
+$posts_name = $_POST['posts_name'];
+$posts_content = $_POST['posts_content'];
+$acc_id = $_SESSION['acc_id'];
+$category_id = $_POST['category'];
 
-	$posts_name = $_POST['posts_name'];
-	$posts_content = $_POST['posts_content'];
-	$thread_img = $_POST['thread_img'];
-	$usertest = 1;
-	$category_id = $_POST['category'];
-	
-    if (isset($_POST['addpost'])) {
+$filenames = isset($_FILES["img"]["name"]) ? $_FILES["img"]["name"] : null;
+$fileTmpNames = isset($_FILES["img"]["tmp_name"]) ? $_FILES["img"]["tmp_name"] : null;
 
-		//*** Insert Question ***//
+$strSQL = "INSERT INTO
+    posts(
+        posts_name,
+        posts_content,
+        acc_id,
+        category_id
+    ) VALUE (
+        '$posts_name',
+        '$posts_content',
+        '$acc_id',
+        '$category_id'
+    )";
 
-		$strSQL = "INSERT INTO 
-		posts(
-			posts_name,
-			posts_content,
-			thread_img,
-			acc_id,
-			category_id
-		) VALUE (
-			'$posts_name',
-			'$posts_content',
-			'$thread_img',
-			'$usertest',
-			'$category_id'
-		)";
+if (mysqli_query($conn, $strSQL)) {
+    $postsID = mysqli_insert_id($conn);
 
-		if (mysqli_query($conn, $strSQL)) {
-			echo '<script>alert("เพิ่มโพสสำเร็จ");window.location="home-webboard.php";</script>';
-		} else {
-			echo "Error: " . $strSQL . "<br>" . mysqli_error($conn);
-		}
+    if (!empty($filenames) && array_filter($filenames)) {
+        foreach ($filenames as $key => $filename) {
+            if ($filename) {
+                $tmpName = $fileTmpNames[$key];
+
+                $ext = explode(".", $filename);
+                $acExt = strtolower(end($ext));
+                $newFilename = time() . "_" . $key . "." . $acExt;
+                $meetFileLocation = '../pic/' . $newFilename;
+
+                if (move_uploaded_file($tmpName, $meetFileLocation)) {
+                    $sql = "INSERT INTO posts_img (posts_img, postsID) VALUES ('$meetFileLocation','$postsID')";
+                    $result = mysqli_query($conn, $sql);
+                    if (!$result) {
+                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                    } else {
+                        $resultData = "ข้อมูลถูกบันทึกเรียบร้อยแล้ว";
+                        $_SESSION['resultData'] = $resultData;
+                    }
+                } else {
+                    echo "Failed to upload image.";
+                    exit;
+                }
+            }
+        }
     }
-	mysqli_close($conn);
-?>
+    // Redirect to home-webboard.php after successfully adding data
+    echo "<script type='text/javascript'>";
+    echo "window.location = 'home-webboard.php'; ";
+    echo "</script>";
+    exit();
+} else {
+    echo "<script type='text/javascript'>";
+    echo "window.location = 'home-webboard.php'; ";
+    echo "</script>";
+    exit();
+}
