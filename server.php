@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost:3306";
-$username = "kkufeed_feedformulation";
-$password = "1xa44Y_k3";
-$dbname = "kkufeed_feedformulation";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "feedformulation";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
